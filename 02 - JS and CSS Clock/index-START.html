@@ -11,7 +11,7 @@
     <div class="clock">
       <div class="clock-face">
         <div class="hand hour-hand"></div>
-        <div class="hand min-hand"></div>
+        <div class="hand minute-hand"></div>
         <div class="hand second-hand"></div>
       </div>
     </div>
@@ -58,18 +58,51 @@
     }
 
     .hand {
+      /* transform: rotate(deg); */
       width: 50%;
       height: 6px;
       background: black;
       position: absolute;
       top: 50%;
+      /* left: 1%; */
     }
+    /* .hour-hand{
+      animation: move-second 60s infinite linear
+    } */
+    /* @keyframes move-second{
+      0% {transform: rotate(100deg)};
+      100% {transform: rotate(100deg)}
+    } */
 
   </style>
 
   <script>
+    
+    let hourPointer = document.querySelector('.hour-hand')
+    let minutePointer = document.querySelector('.minute-hand')
+    let secondPointer = document.querySelector('.second-hand')
+    
+    
+    
+    function setTime(){
+      let hour =new Date().getHours()
+      hourPointer.style.transformOrigin = "100% 0"
+      hourPointer.style.transform = `rotate(${hour * 360/12 + 90}deg)`
 
+      let minute = new Date().getMinutes()
+      minutePointer.style.transformOrigin = "100% 0"
+      minutePointer.style.transform = `rotate(${minute * 6 + 90}deg)`
+      
+      let seconds =new Date().getSeconds()
+      secondPointer.style.transformOrigin = "100% 0"
+      secondPointer.style.transform = `rotate(${seconds *  360/60 + 90}deg)`
+    }
+    
+    setInterval(()=>{
+      // setTime()
 
+    },1000)
+    
   </script>
 </body>
 </html>
