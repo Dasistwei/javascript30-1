@@ -19,7 +19,7 @@
     <input id="base" type="color" name="base" value="#ffc600">
   </div>
 
-  <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
+  <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500" class = "image">
 
   <style>
 
@@ -46,6 +46,22 @@
   </style>
 
   <script>
+    let image = document.querySelector(".image")
+    let blur = document.querySelector("#blur")
+    let spacing = document.querySelector("#spacing")
+    let base = document.querySelector("#base")
+
+    blur.addEventListener('change',(e)=>{
+      image.style.filter = `blur(${e.target.value}px)`
+    })
+    spacing.addEventListener('change',(e)=>{
+      image.style.padding = `${e.target.value}px`
+    })
+    base.addEventListener('change',(e)=>{
+      image.style.backgroundColor = `${e.target.value}`
+      console.log(e.target.value)
+    })
+
   </script>
 
 </body>
