@@ -17,7 +17,35 @@
   </form>
 <script>
 const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+const cities = []
+let inputValue ="New York"
 
+fetch(endpoint)
+.then(res => res.json())
+.then(data => cities.push(...data));
+
+
+
+
+const inputElement = document.querySelector(".search")
+const listElement = document.querySelector(".suggestions")
+
+inputElement.addEventListener("input", (event)=>{ 
+  inputValue = event.target.value
+  const regx= new RegExp(inputValue, 'gi')
+
+  let results = cities.filter(city=>city.state.match(regx) || city.city.match(regx))
+  let output = results.map((result)=>{
+  const cityName =result.city.replace(regx, `<span class="hl">${inputValue}</span>`)
+
+    return `<li>
+            <span class="name">${cityName}, ${result.state}</span>
+            <span>${result.population}</span>
+            </li>`
+  }).join(" ")
+  // console.log(output)
+  listElement.innerHTML = output
+})
 </script>
 </body>
 </html>
