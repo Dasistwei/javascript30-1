@@ -38,7 +38,8 @@ video.addEventListener("click", playOrPauseVideo)
 video.addEventListener("timeupdate", handleProgress)
 playBtn.addEventListener("click", playOrPauseVideo)
 skipBtn.addEventListener("click", skipVideo)
-ranges.forEach(range=>range.addEventListener("click", handleRange))
+ranges.forEach(range=>range.addEventListener("mousemove", handleRange))
+ranges.forEach(range=>range.addEventListener("change", handleRange))
 
 
 let mousedown = false
