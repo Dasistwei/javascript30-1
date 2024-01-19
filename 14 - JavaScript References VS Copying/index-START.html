@@ -16,10 +16,11 @@
     // and we want to make a copy of it.
 
     // You might think we can just do something like this:
-
+    // const newPlayers = players
     // however what happens when we update that array?
-
+    // newPlayers.push("Sue")
     // now here is the problem!
+    // console.log(newPlayers, players)
 
     // oh no - we have edited the original array too!
 
@@ -29,11 +30,20 @@
 
     // one way
 
+    const newPlayers01 = players.slice(0)
+    newPlayers01.push("Sue")
+    // console.log(players, newPlayers, 'dsf')
+    
     // or create a new array and concat the old one in
-
+    const newPlayers02 = [].concat(players)
+    newPlayers02.push("Sue")
     // or use the new ES6 Spread
-
+    const newPlayers03= [...players]
+    
     // now when we update it, the original one isn't changed
+    const newPlayers04= Array.from(players)
+    newPlayers04.pop()
+    // console.log(newPlayers04, players)
 
     // The same thing goes for objects, let's say we have a person object
 
@@ -44,13 +54,29 @@
     };
 
     // and think we make a copy:
-
-    // how do we take a copy instead?
-
-    // We will hopefully soon see the object ...spread
+      const newPerson = person
+      // how do we take a copy instead?
+      newPerson.age=100
+      // We will hopefully soon see the object ...spread
+      const newPerson02 = Object.assign({}, person)
+      newPerson02.age = 90
+      // console.log(person, newPerson02)
 
     // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
-
+    const deepPerson = {
+      name: 'Wes Bos',
+      age: 80,
+      socialMedias: {
+        ig: '@wes',
+        twitter: '@wes'
+      }
+    };
+    // const newDeepPerson =  deepPerson
+    // newDeepPerson.socialMedias.ig ="@pp"
+    const newDeepPerson02 = JSON.parse(JSON.stringify(deepPerson))
+    newDeepPerson02.socialMedias.ig = '@UU'
+    // console.log()
+    console.log(deepPerson.socialMedias.ig, newDeepPerson02.socialMedias.ig)
   </script>
 
 </body>
