@@ -36,6 +36,35 @@
   </style>
 
 <script>
+  const heroDiv = document.querySelector(".hero")
+  const inputText = heroDiv.querySelector("h1")
+  const walk = 500
+  
+  const { offsetWidth: divWidth, offsetHeight: divHeight } = heroDiv
+
+  function shadowMove(e){
+    let { offsetX: x, offsetY: y } = e
+    if(this !== e.target){
+      x = x + e.target.offsetLeft
+      y = y + e.target.offsetTop
+    }
+
+    const xWalk = Math.round((x / divWidth * walk) -( walk / 2))
+    const yWalk = Math.round((y / divHeight * walk) -( walk / 2))
+    console.log(xWalk, yWalk)
+
+    inputText.style.textShadow = 
+    `${xWalk}px ${yWalk}px 0 red,
+    ${xWalk * -1}px ${yWalk}px 0 blue,
+    ${xWalk * -1}px ${yWalk * -1}px 0 yellow
+    `
+  }
+  // (e)=>{
+  //   // console.log(e.offsetX, e.offsetY, this)
+  //   console.log(this, e)
+  //   // console.log(inputText.style.textShadow = `${e.offsetX}px ${e.offsetY}px 0 red`, divWidth)
+  // }  
+  heroDiv.addEventListener("mousemove", shadowMove)
 </script>
 </body>
 </html>
