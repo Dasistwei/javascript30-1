@@ -48,8 +48,23 @@
 
 <script>
 const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+const ulEle = document.getElementById("bands")
 
+const removeArticle = (string) =>{
+  return string.replace(/^(an |the |a )/i, '').trim()
+  // return (string.split(" ")[0].toLowerCase() === "the" || string.split(" ")[0].toLowerCase() === "a" || string.split(" ")[0].toLowerCase() === "an")? string.split(" ")[1]:string.split(" ")[0]
+}
 
+const compare = (a, b) =>{
+  a = removeArticle(a)
+  b = removeArticle(b)
+  return a > b ? 1 : -1
+}
+const sortedBands= bands.sort(compare)
+
+ulEle.innerHTML = sortedBands.map((band)=>{
+  return `<li>${band}</li>`
+}).join("")
 </script>
 
 </body>
