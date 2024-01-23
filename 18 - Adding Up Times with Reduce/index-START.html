@@ -183,6 +183,19 @@
     </li>
   </ul>
 <script>
+  const videos = document.querySelectorAll('[data-time]')
+
+  const totalTime = Array.from(videos).reduce((acc, curr)=>{
+    let time = curr.dataset.time.split(":")
+    acc[0]+= Number(time[0])
+    acc[1]+= Number(time[1])
+    return acc
+}, [0,0])
+
+let sec = totalTime[1]%60
+let min = (totalTime[0] + ((totalTime[1]-sec)/60))%60
+let hour = Math.floor((totalTime[0] + ((totalTime[1]-sec)/60))/60)
+console.log(hour, min, sec)
 </script>
 </body>
 </html>
