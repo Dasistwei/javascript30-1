@@ -17,7 +17,7 @@ const getVideo = ()=>{
 
 const takePhoto = ()=>{
   snap.play()
-  ctx.drawImage(video, 0, 0, 100, 100);
+
   const data = canvas.toDataURL("image/png");
   const link = document.createElement('a')
   link.href = data

@@ -7,7 +7,7 @@
   <link rel="icon" href="https://fav.farm/🔥" />
 </head>
 <body>
-
+  <span class="highlight"></span>
     <nav>
       <ul class="menu">
         <li><a href="">Home</a></li>
@@ -27,7 +27,20 @@
     </div>
 
   <script>
-    // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
+    const focusWords = document.querySelectorAll('a')
+    const highlight = document.querySelector('.highlight')
+    // console.log(')
+    // highlight.style.height = '100px'
+    focusWords.forEach((focusWord)=>{
+      focusWord.addEventListener('mouseenter', ()=>{
+        const focusPosition= focusWord.getBoundingClientRect()
+        console.log('focusWord', focusPosition.top)
+
+        highlight.style.width = `${focusPosition.width}px`
+        highlight.style.height = `${focusPosition.height}px`
+        highlight.style.transform = `translate(${focusPosition.left}px, ${focusPosition.top + window.scrollY}px)`;
+      })
+    })
   </script>
 </body>
 </html>
