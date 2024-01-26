@@ -33,38 +33,45 @@
   const msg = new SpeechSynthesisUtterance();
   let voices = [];
   const voicesDropdown = document.querySelector('[name="voice"]');
-  const options = document.querySelectorAll('[type="range"], [name="text"]');
-  
-  const inputText= document.querySelector('[name = "text"]')
-  const rate = document.querySelector('[name = "rate"]')
-  const pitch = document.querySelector('[name="pitch"]')
-
+  const options = document.querySelectorAll('[type="range"], [name="text"]')
   const speakButton = document.querySelector('#speak');
   const stopButton = document.querySelector('#stop');
 
-
-  // console.log(options[0].name)
-  speakButton.addEventListener('click',()=>{
-    // set vioce
-    msg.text= inputText.value
-    msg.rate = rate.value
-    msg.pitch = pitch.value
-    msg.lang = voicesDropdown.options[voicesDropdown.options.selectedIndex].value
-    speechSynthesis.speak(msg)
-  })
-  speechSynthesis.addEventListener("voiceschanged", (event) => {
+  const setSpeechLang =()=>{
+    msg.lang = voicesDropdown.options[voicesDropdown.options.selectedIndex].value   
+    playSpeech()
+  }
+  const setSpeechValues =(e)=>{
+    msg[e.target.name] = e.target.value
+  }
+  const setDropdownLangs = ()=>{
     // get voices options
     voices = speechSynthesis.getVoices()
-    voices.forEach((voice)=>{
+
+    voices.filter((voice)=>voice.lang.match(/^en/))
+    .forEach((voice)=>{
+        // console.log(voice)
       const newOption = document.createElement("option")
       newOption.value= voice.lang
       newOption.text= voice.name.replace(/Google|Eddy/,"")
       voicesDropdown.append(newOption)
     })
-  });
-  stopButton.addEventListener('click',()=>{
-    speechSynthesis.cancel()
-  })
+  }
+
+  // playSpeech()
+  const playSpeech = (play = true)=>{
+    play ? speechSynthesis.speak(msg) : speechSynthesis.cancel()
+    console.log('play')
+  }
+
+  //listen for rate pitch text change
+  options.forEach((option)=> option.addEventListener('change',setSpeechValues ))
+
+  speechSynthesis.addEventListener("voiceschanged",setDropdownLangs);
+
+  voicesDropdown.addEventListener('change',setSpeechLang)
+  speakButton.addEventListener('click',playSpeech)
+  stopButton.addEventListener('click',()=>playSpeech(false))
 </script>
 
 </body>
