@@ -23,7 +23,7 @@
       <label for="pitch">Pitch:</label>
 
       <input name="pitch" type="range" min="0" max="2" step="0.1">
-      <textarea name="text">Hello! I love JavaScript 👍</textarea>
+      <textarea name="text"></textarea>
       <button id="stop">Stop!</button>
       <button id="speak">Speak</button>
 
@@ -34,8 +34,37 @@
   let voices = [];
   const voicesDropdown = document.querySelector('[name="voice"]');
   const options = document.querySelectorAll('[type="range"], [name="text"]');
+  
+  const inputText= document.querySelector('[name = "text"]')
+  const rate = document.querySelector('[name = "rate"]')
+  const pitch = document.querySelector('[name="pitch"]')
+
   const speakButton = document.querySelector('#speak');
   const stopButton = document.querySelector('#stop');
+
+
+  // console.log(options[0].name)
+  speakButton.addEventListener('click',()=>{
+    // set vioce
+    msg.text= inputText.value
+    msg.rate = rate.value
+    msg.pitch = pitch.value
+    msg.lang = voicesDropdown.options[voicesDropdown.options.selectedIndex].value
+    speechSynthesis.speak(msg)
+  })
+  speechSynthesis.addEventListener("voiceschanged", (event) => {
+    // get voices options
+    voices = speechSynthesis.getVoices()
+    voices.forEach((voice)=>{
+      const newOption = document.createElement("option")
+      newOption.value= voice.lang
+      newOption.text= voice.name.replace(/Google|Eddy/,"")
+      voicesDropdown.append(newOption)
+    })
+  });
+  stopButton.addEventListener('click',()=>{
+    speechSynthesis.cancel()
+  })
 </script>
 
 </body>

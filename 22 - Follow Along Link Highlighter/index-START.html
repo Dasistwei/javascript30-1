@@ -7,7 +7,6 @@
   <link rel="icon" href="https://fav.farm/🔥" />
 </head>
 <body>
-  <span class="highlight"></span>
     <nav>
       <ul class="menu">
         <li><a href="">Home</a></li>
@@ -28,19 +27,24 @@
 
   <script>
     const focusWords = document.querySelectorAll('a')
-    const highlight = document.querySelector('.highlight')
-    // console.log(')
-    // highlight.style.height = '100px'
-    focusWords.forEach((focusWord)=>{
-      focusWord.addEventListener('mouseenter', ()=>{
-        const focusPosition= focusWord.getBoundingClientRect()
-        console.log('focusWord', focusPosition.top)
+    const highlight = document.createElement('span')
+    highlight.classList.add('highlight')
+    document.body.appendChild(highlight)
 
-        highlight.style.width = `${focusPosition.width}px`
-        highlight.style.height = `${focusPosition.height}px`
-        highlight.style.transform = `translate(${focusPosition.left}px, ${focusPosition.top + window.scrollY}px)`;
-      })
-    })
+    function makeHighlight(){
+      const focusPosition= this.getBoundingClientRect()
+      const coords ={
+        width : focusPosition.width,
+        height : focusPosition.height,
+        left : focusPosition.left,
+        top : focusPosition.top + window.scrollY
+      }
+      // console.log(coords)
+      highlight.style.width = `${coords.width}px`
+      highlight.style.height = `${coords.height}px`
+      highlight.style.transform = `translate(${coords.left}px, ${coords.top}px)`;      
+    }
+    focusWords.forEach((focusWord)=>focusWord.addEventListener('mouseenter', makeHighlight))
   </script>
 </body>
 </html>
