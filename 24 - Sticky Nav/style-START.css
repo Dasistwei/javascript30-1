@@ -43,8 +43,8 @@ h1 {
 
 nav {
   background: black;
-  top: 0;
   width: 100%;
+  top: 0;
   transition: all 0.5s;
   position: relative;
   z-index: 1;
@@ -73,6 +73,7 @@ li.logo {
   font-weight: 600;
   font-size: 30px;
 }
+
 
 li.logo a {
   color: black;

@@ -55,7 +55,26 @@
   </div>
 
 <script>
+  const header = document.querySelector("header")
+  const navBar = document.querySelector("#main")
+  const logoLi = document.querySelector(".logo")
 
+  const logoStyle =document.styleSheets[0].rules[9].style
+  
+  const fixNav = ()=>{
+    if(window.scrollY >= header.offsetHeight){
+      navBar.style.position = "fixed"
+      logoStyle.removeProperty("max-width")
+      logoStyle.removeProperty("overflow")
+    }else{
+      navBar.style.position = null
+      console.log(logoLi.style.maxWidth)
+      logoStyle.setProperty("max-width", 0)
+      logoStyle.setProperty("overflow", "hidden")
+    }
+  }
+  
+  document.addEventListener('scroll', fixNav)
 </script>
 
 </body>

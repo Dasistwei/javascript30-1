@@ -37,11 +37,11 @@
   const speakButton = document.querySelector('#speak');
   const stopButton = document.querySelector('#stop');
 
-  const setSpeechLang =()=>{
+  const setMsgLang =()=>{
     msg.lang = voicesDropdown.options[voicesDropdown.options.selectedIndex].value   
     playSpeech()
   }
-  const setSpeechValues =(e)=>{
+  const setMsgValues =(e)=>{
     msg[e.target.name] = e.target.value
   }
   const setDropdownLangs = ()=>{
@@ -65,11 +65,11 @@
   }
 
   //listen for rate pitch text change
-  options.forEach((option)=> option.addEventListener('change',setSpeechValues ))
+  options.forEach((option)=> option.addEventListener('change',setMsgValues ))
 
   speechSynthesis.addEventListener("voiceschanged",setDropdownLangs);
 
-  voicesDropdown.addEventListener('change',setSpeechLang)
+  voicesDropdown.addEventListener('change',setMsgLang)
   speakButton.addEventListener('click',playSpeech)
   stopButton.addEventListener('click',()=>playSpeech(false))
 </script>
