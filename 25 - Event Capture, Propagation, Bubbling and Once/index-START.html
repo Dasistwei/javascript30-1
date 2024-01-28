@@ -43,7 +43,15 @@
 
 <button></button>
 <script>
+  const divs= document.querySelectorAll('div')
+  function printText(e){
+    e.stopPropagation()
+    console.log(this)
 
+  }
+  divs.forEach((div)=>{
+    div.addEventListener('click',printText)
+  })
 </script>
 </body>
 </html>
