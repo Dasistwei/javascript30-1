@@ -192,6 +192,8 @@
   }
 
   .courses {
+    /* border: 10px solid red; */
+    /* display: block; */
     min-width: 300px;
   }
 
@@ -221,6 +223,18 @@
 </style>
 
 <script>
+  document.querySelectorAll('.dropdown').forEach((dropdown)=>{
+    // console.log()
+    dropdown.previousElementSibling.addEventListener('mouseover', (e)=>{
+      dropdown.style.opacity = 1
+      dropdown.style.background = 'white'
+      dropdown.style.display = 'block'
+    })
+    dropdown.previousElementSibling.addEventListener('mouseout', (e)=>{
+      // console.log(e.target, dropdown)
+      dropdown.style.opacity = 0
+    })
+  })
 </script>
 
 </body>
