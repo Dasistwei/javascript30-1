@@ -142,6 +142,12 @@
     will-change: opacity;
     display: none;
   }
+  .dropdown-block{
+    display: block;
+  }
+  .dropdown-show{
+    opacity: 1;
+  }
 
   .trigger-enter .dropdown {
     display: block;
@@ -223,16 +229,29 @@
 </style>
 
 <script>
-  document.querySelectorAll('.dropdown').forEach((dropdown)=>{
-    // console.log()
-    dropdown.previousElementSibling.addEventListener('mouseover', (e)=>{
-      dropdown.style.opacity = 1
-      dropdown.style.background = 'white'
-      dropdown.style.display = 'block'
+  const arrow = document.querySelector(".dropdownBackground")
+  document.querySelectorAll('.cool >li').forEach((li)=>{
+    li.addEventListener('mouseover', (e)=>{
+      const dropdown = li.querySelector(".dropdown")
+      arrow.classList.add('open')
+      dropdown.classList.add('dropdown-block')
+      setTimeout(()=>{
+        console.log("hi")
+        dropdown.classList.contains('dropdown-block')&&dropdown.classList.add('dropdown-show')
+      }, 150)
+      const {left, width, height, bottom}= dropdown.getBoundingClientRect()
+      const {top}= dropdown.previousElementSibling.getBoundingClientRect()
+      arrow.style.top = top + 'px'
+      arrow.style.left = left + 'px'
+      arrow.style.width = width + 'px'
+      arrow.style.height = height + 'px'
+
     })
-    dropdown.previousElementSibling.addEventListener('mouseout', (e)=>{
-      // console.log(e.target, dropdown)
-      dropdown.style.opacity = 0
+    li.addEventListener('mouseout', (e)=>{
+      arrow.classList.remove('open')
+      const dropdown = li.querySelector(".dropdown")
+      dropdown.classList.remove('dropdown-block', 'dropdown-show')
+      
     })
   })
 </script>
