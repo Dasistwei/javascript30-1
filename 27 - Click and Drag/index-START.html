@@ -7,7 +7,7 @@
   <link rel="icon" href="https://fav.farm/🔥" />
 </head>
 <body>
-  <div class="items">
+  <div class="items" style="margin: 25px">
     <div class="item item1">01</div>
     <div class="item item2">02</div>
     <div class="item item3">03</div>
@@ -36,6 +36,36 @@
   </div>
 
 <script>
+  const items = document.querySelector(".items")
+  let down = false
+  let startX
+  let itemsLeft = items.scrollLeft
+
+  items.addEventListener('mousedown', (e)=>{
+    startX = e.pageX - items.offsetLeft
+    
+    down = true
+    items.classList.add("active")
+    // console.log('on')
+  })
+  items.addEventListener('mousemove', (e)=>{
+    if(down){
+      e.preventDefault()
+      let x = e.pageX-items.offsetLeft
+      let walk = (x - startX)*3
+      items.scrollLeft = itemsLeft - walk 
+      console.log(itemsLeft)
+      // console.log('move' , startX,  e.clientX,  e.clientX - startX)
+      // let left = 
+      // items.scroll(startX - (e.clientX - startX), 0)
+    }
+    
+  })
+  items.addEventListener('mouseup', ()=>{
+    down = false
+    items.classList.remove("active")
+    // console.log('off')
+  })
 </script>
 
   </body>
