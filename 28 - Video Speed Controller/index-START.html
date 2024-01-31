@@ -9,13 +9,32 @@
 <body>
 
   <div class="wrapper">
-    <video class="flex" width="765" height="430" src="http://clips.vorwaerts-gmbh.de/VfE_html5.mp4" loop controls></video>
+    <!-- <video class="flex" width="765" height="430" src="http://clips.vorwaerts-gmbh.de/VfE_html5.mp4" loop controls></video> -->
+    <video class="flex" width="765" height="430" src="https://player.vimeo.com/progressive_redirect/playback/890647039/rendition/540p/file.mp4?loc=external&oauth2_token_id=1747418641&signature=b9276ac7767e300f2466412c6387174ff10f198e87f03c6495100e44c306efc7" loop controls></video>
     <div class="speed">
       <div class="speed-bar">1×</div>
     </div>
   </div>
 
 <script>
+  const video = document.querySelector(".flex")
+  const speedDiv = document.querySelector(".speed")
+  const speedBar = document.querySelector(".speed-bar")
+  // console.log(video.playbackRate = 2)
+  // console.log(speedBar.style.height = '40%')
+  // console.log(speed.offsetHeight)
+  speedDiv.addEventListener('mousemove', (e)=>{
+    const percent = Math.floor(e.offsetY * 100/speedDiv.offsetHeight)
+    const min = 0.4
+    const max = 4
+    const prorotion = ((max-min)/100).toFixed(3)
+    const speed = ((prorotion * percent)+ min).toFixed(2)
+    // console.log(speed)
+    speedBar.style.height = percent + '%'
+    speedBar.innerHTML = speed + 'x'
+    video.playbackRate = speed
+    // console.log(video.playbackRate)
+  })
 </script>
 </body>
 </html>
